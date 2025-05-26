@@ -1,6 +1,7 @@
 -- Create the ecommerce database
-CREATE DATABASE ecommerce;
-USE ecommerce;
+DROP DATABASE IF EXISTS commerce;
+CREATE DATABASE IF NOT EXISTS commerce;
+USE commerce;
 
 -- Table: brand
 -- Stores brand information for products
@@ -22,11 +23,11 @@ CREATE TABLE product_category (
 -- Stores general product information
 CREATE TABLE product (
     product_id INT AUTO_INCREMENT PRIMARY KEY,  -- Unique product ID
-    name VARCHAR(150) NOT NULL,                 -- Product name
+    product_name VARCHAR(150) NOT NULL,                 -- Product name
     brand_id INT,                               -- Foreign key to brand
     category_id INT,                            -- Foreign key to product_category
     base_price DECIMAL(10, 2) NOT NULL,         -- Base price before variations
-    description TEXT,                           -- Product description
+    descriptiion TEXT,                           -- Product description
     FOREIGN KEY (brand_id) REFERENCES brand(brand_id),
     FOREIGN KEY (category_id) REFERENCES product_category(category_id)
 );
@@ -115,4 +116,5 @@ CREATE TABLE product_attribute (
     value VARCHAR(255) NOT NULL,                          -- Attribute value
     FOREIGN KEY (product_id) REFERENCES product(product_id),
     FOREIGN KEY (attribute_category_id) REFERENCES attribute_category(attribute_category_id),
-    FOREIGN KEY (attribute_type_id) REFERENCES attribute_type(attribute_type_id)
+    FOREIGN KEY (attribute_type_id) REFERENCES attribute_type(attribute_type_id));
+
